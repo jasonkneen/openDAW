@@ -22,6 +22,7 @@ import {ValueEventBox} from "./timeline/ValueEventBox"
 import {ValueEventCurveBox} from "./timeline/ValueEventCurveBox"
 import {ValueEventCollectionBox} from "./timeline/ValueEventCollectionBox"
 import {ValueRegionBox} from "./timeline/ValueRegionBox"
+import {StemSeparationJobBox, StemSeparationOutputBox} from "./StemSeparationBox"
 
 export const Definitions = [
     RootBox, SelectionBox, UserInterfaceBox, UploadFileBox,
@@ -33,5 +34,6 @@ export const Definitions = [
     AudioFileBox, SoundfontFileBox,
     AudioUnitBox, CaptureAudioBox, CaptureMidiBox,
     AudioBusBox, AuxSendBox,
-    GrooveShuffleBox
+    GrooveShuffleBox,
+    StemSeparationJobBox, StemSeparationOutputBox
 ]

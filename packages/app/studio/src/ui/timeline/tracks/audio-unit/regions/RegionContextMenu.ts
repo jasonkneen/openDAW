@@ -17,6 +17,7 @@ import {Dialogs} from "@/ui/components/dialogs.tsx"
 import {StudioService} from "@/service/StudioService"
 import {TimelineRange} from "@opendaw/studio-core"
 import {AudioPlayback} from "@opendaw/studio-enums"
+import {executeStemSplitting} from "@/service/stem-separation"
 
 type Construct = {
     element: Element
@@ -126,6 +127,20 @@ export const installRegionContextMenu =
                         editing.modify(() => adapters.forEach(region => region.setPlayback(AudioPlayback.NoSync)))
                     })
                 )),
+                MenuItem.default({
+                    label: "Split Stems",
+                    hidden: region.type !== "audio-region",
+                    separatorBefore: true
+                }).setTriggerProcedure(() => {
+                    if (region.type === "audio-region") {
+                        executeStemSplitting({
+                            project,
+                            region
+                        }).catch(error => {
+                            console.error("Stem splitting failed:", error)
+                        })
+                    }
+                }),
                 MenuItem.default({
                     label: "Calc Bpm",
                     hidden: region.type !== "audio-region" || !Browser.isLocalHost()

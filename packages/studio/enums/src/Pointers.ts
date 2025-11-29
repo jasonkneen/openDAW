@@ -44,4 +44,6 @@ export enum Pointers {
     ValueEventCollection,
     ValueInterpolation,
     Sample,
+    StemSeparationJob,
+    StemSeparationOutput,
 } 
