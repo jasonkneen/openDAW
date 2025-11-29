@@ -31,6 +31,7 @@ import {AudioTimeStretchBox} from "./timeline/AudioTimeStretchBox"
 import {MetaDataBox} from "./MetaDataBox"
 import {MIDIControllerBox} from "./MIDIControllerBox"
 import {SignatureEventBox} from "./timeline/SignatureEventBox"
+import {StemSeparationJobBox, StemSeparationOutputBox} from "./StemSeparationBox"
 
 export const Definitions = [
     MetaDataBox,
@@ -43,5 +44,6 @@ export const Definitions = [
     AudioFileBox, SoundfontFileBox, NeuralAmpModelBox,
     AudioUnitBox, CaptureAudioBox, CaptureMidiBox,
     AudioBusBox, AuxSendBox,
-    GrooveShuffleBox
+    GrooveShuffleBox,
+    StemSeparationJobBox, StemSeparationOutputBox
 ]

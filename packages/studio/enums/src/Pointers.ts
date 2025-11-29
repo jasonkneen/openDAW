@@ -45,6 +45,8 @@ export enum Pointers {
     SignatureAutomation,
     SoundfontFile,
     StepAutomation,
+    StemSeparationJob,
+    StemSeparationOutput,
     Timeline,
     TrackCollection,
     TransientMarkers,

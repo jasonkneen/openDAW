@@ -1,0 +1,85 @@
+@use "@/colors" as colors
+
+.StemSplittingDialog
+    display: flex
+    flex-direction: column
+    gap: 1em
+    padding: 1em 0
+    color: var(--color-cream)
+
+    .info
+        p
+            margin: 0
+            color: var(--color-gray)
+            font-size: 0.9em
+            line-height: 1.4
+
+        strong
+            color: var(--color-cream)
+
+    .section
+        display: flex
+        flex-direction: column
+        gap: 0.5em
+
+        h3
+            margin: 0
+            font-size: 0.85em
+            font-weight: 600
+            color: var(--color-gray)
+            text-transform: uppercase
+            letter-spacing: 0.05em
+
+    .model-selector
+        display: flex
+        gap: 0.5em
+
+        .model-option
+            flex: 1
+            padding: 0.75em
+            background: var(--color-dark)
+            border: 1px solid var(--color-gray)
+            border-radius: 4px
+            cursor: pointer
+            transition: all 0.15s ease
+
+            &:hover
+                border-color: var(--color-blue)
+
+            &.selected
+                border-color: var(--color-blue)
+                background: hsla(189, 100%, 65%, 0.1)
+
+            .label
+                font-weight: 600
+                font-size: 0.95em
+                margin-bottom: 0.25em
+
+            .description
+                font-size: 0.75em
+                color: var(--color-gray)
+
+    .stem-selector
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr))
+        gap: 0.5em
+
+        > *
+            padding: 0.5em 0.75em
+            background: var(--color-dark)
+            border-radius: 4px
+
+            span
+                flex: 1
+
+    .progress-section
+        display: flex
+        flex-direction: column
+        gap: 0.75em
+        padding: 1em 0
+
+        .message
+            margin: 0
+            font-size: 0.9em
+            color: var(--color-gray)
+            text-align: center

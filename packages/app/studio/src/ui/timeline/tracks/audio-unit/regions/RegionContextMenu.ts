@@ -23,6 +23,7 @@ import {StudioService} from "@/service/StudioService"
 import {Promises} from "@opendaw/lib-runtime"
 import {RegionsShortcuts} from "@/ui/shortcuts/RegionsShortcuts"
 import {TempoDetection} from "@/service/TempoDetection"
+import {executeStemSplitting} from "@/service/stem-separation"
 
 type Construct = {
     element: Element
@@ -180,6 +181,20 @@ export const installRegionContextMenu =
                         }
                     )
                 )),
+                MenuItem.default({
+                    label: "Split Stems",
+                    hidden: region.type !== "audio-region",
+                    separatorBefore: true
+                }).setTriggerProcedure(() => {
+                    if (region.type === "audio-region") {
+                        executeStemSplitting({
+                            project,
+                            region
+                        }).catch(error => {
+                            console.error("Stem splitting failed:", error)
+                        })
+                    }
+                }),
                 MenuItem.default({
                     label: "Calc Bpm",
                     hidden: region.type !== "audio-region" || !Browser.isLocalHost()
