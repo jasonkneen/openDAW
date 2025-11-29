@@ -13,6 +13,7 @@ export default defineConfig(({command}) => {
     const env = process.env.NODE_ENV as BuildInfo["env"]
     const date = Date.now()
     const certsExist = existsSync(resolve(__dirname, "../../../certs/localhost-key.pem"))
+    const isTauri = process.env.TAURI_ENV_DEBUG !== undefined || process.env.TAURI_ENV_PLATFORM !== undefined
 
     return {
         resolve: {
@@ -43,8 +44,9 @@ export default defineConfig(({command}) => {
         clearScreen: false,
         server: {
             port: 8080,
-            host: "localhost",
-            https: command === "serve" ? {
+            host: isTauri ? "0.0.0.0" : "localhost",
+            strictPort: true,
+            https: command === "serve" && certsExist && !isTauri ? {
                 key: readFileSync(resolve(__dirname, "../../../certs/localhost-key.pem")),
                 cert: readFileSync(resolve(__dirname, "../../../certs/localhost.pem"))
             } : undefined,

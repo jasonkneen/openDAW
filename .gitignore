@@ -20,3 +20,7 @@ lerna-debug.log
 /certs/localhost-key.pem
 /packages/app/soundfont/public/soundfonts/
 /packages/studio/scripting/src/api.declaration.d.ts
+
+# Tauri
+/packages/app/studio/src-tauri/target/
+/packages/app/studio/src-tauri/Cargo.lock

@@ -1,0 +1,120 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "openDAW Studio",
+  "identifier": "studio.opendaw.app",
+  "version": "0.0.59",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:8080",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "openDAW Studio",
+        "width": 1400,
+        "height": 900,
+        "minWidth": 800,
+        "minHeight": 600,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self' blob: data:",
+        "script-src": "'self' 'wasm-unsafe-eval'",
+        "style-src": "'self' 'unsafe-inline'",
+        "img-src": "'self' asset: http://asset.localhost blob: data: https:",
+        "font-src": "'self' data:",
+        "connect-src": "'self' https: wss: blob:",
+        "media-src": "'self' blob: data: https:",
+        "worker-src": "'self' blob:"
+      },
+      "headers": {
+        "Cross-Origin-Opener-Policy": "same-origin",
+        "Cross-Origin-Embedder-Policy": "require-corp"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": [],
+    "category": "Music",
+    "shortDescription": "A next-generation digital audio workstation",
+    "longDescription": "openDAW Studio is a powerful, web-based digital audio workstation designed to democratize music production. It features a modern interface, real-time audio processing, MIDI support, and seamless cloud integration.",
+    "copyright": "Copyright (c) openDAW Contributors",
+    "linux": {
+      "appimage": {
+        "bundleMediaFramework": true
+      },
+      "deb": {
+        "depends": [
+          "libasound2",
+          "libwebkit2gtk-4.1-0",
+          "libgtk-3-0"
+        ],
+        "section": "sound"
+      },
+      "rpm": {
+        "release": "1"
+      }
+    },
+    "macOS": {
+      "minimumSystemVersion": "10.15",
+      "signingIdentity": null,
+      "entitlements": null,
+      "dmg": {
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 170
+        },
+        "windowSize": {
+          "width": 660,
+          "height": 400
+        }
+      }
+    },
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": "",
+      "nsis": {
+        "installMode": "currentUser"
+      },
+      "wix": null
+    }
+  },
+  "plugins": {
+    "shell": {
+      "open": true
+    },
+    "fs": {
+      "all": true,
+      "scope": ["$AUDIO/*", "$DOCUMENT/*", "$DOWNLOAD/*", "$HOME/*"]
+    },
+    "http": {
+      "all": true,
+      "scope": [
+        "https://*.opendaw.studio/*",
+        "https://*.dropboxapi.com/*",
+        "https://*.googleapis.com/*",
+        "https://*.google.com/*"
+      ]
+    }
+  }
+}

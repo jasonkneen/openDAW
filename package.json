@@ -18,7 +18,10 @@
     "test": "turbo run test --concurrency=1",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "publish-sdk": "lerna publish"
+    "publish-sdk": "lerna publish",
+    "tauri:dev": "npm run tauri:dev --workspace=@opendaw/app-studio",
+    "tauri:build": "npm run tauri:build --workspace=@opendaw/app-studio",
+    "tauri:icons": "npm run tauri:icons --workspace=@opendaw/app-studio"
   },
   "devDependencies": {
     "@types/ssh2-sftp-client": "^9.0.5",
