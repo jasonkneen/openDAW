@@ -68,6 +68,7 @@ export class SignatureTrackAdapter implements Terminable {
 
     nonEmpty(): boolean {return this.#adapters.size() > 0}
 
+    /** @internal */
     dispatchChange(): void {this.changeNotifier.notify()}
 
     signatureAt(position: ppqn): Readonly<[int, int]> {
