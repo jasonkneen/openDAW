@@ -1,3 +1,4 @@
+export * from "./canvas"
 export * from "./clipboard/ClipboardManager"
 export * from "./clipboard/ClipboardUtils"
 export * from "./clipboard/ContextMenu"
