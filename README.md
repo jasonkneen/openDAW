@@ -114,6 +114,8 @@ skyboundzoo, JHINZ, Mark Dammer, fork-kun, Martin Eigel
 * Fold (waveform folding algorithm with oversampling)
 * Tidal (shapes rhythm and space through volume and pan)
 * Dattorro Reverb (dense algorithmic reverb based on Dattorro's design)
+* Waveshaper (applies non-linear waveshaping distortion)
+* Werkstatt (user-scripted audio-processor)
 
 #### Ported Plugins (Excluded in commercial license)
 
