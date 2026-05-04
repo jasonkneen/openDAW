@@ -1,3 +1,4 @@
+import {tryCatch} from "@opendaw/lib-std"
 import MemoryWorker from "./memory-worker.ts?worker"
 import {MEMORY_TESTS, MemoryResult, runMemoryTest} from "./MemoryBenchmark"
 
@@ -7,9 +8,11 @@ export type MemoryWorkerError = { readonly kind: "worker-error", readonly messag
 type WorkerMessage =
     | { readonly kind: "progress", readonly id: string, readonly label: string, readonly index: number, readonly total: number }
     | { readonly kind: "result", readonly result: MemoryResult }
+    | { readonly kind: "test-error", readonly id: string, readonly label: string, readonly message: string }
     | { readonly kind: "done" }
 
 const yieldToEventLoop = (): Promise<void> => new Promise(resolve => setTimeout(resolve, 0))
+const errorMessage = (error: unknown): string => error instanceof Error ? error.message : String(error)
 
 export const runMemoryBenchmarks = async (
     onProgress: (progress: MemoryProgress) => void,
@@ -21,7 +24,12 @@ export const runMemoryBenchmarks = async (
     for (const test of MEMORY_TESTS) {
         onProgress({current: `${test.label} (main)`, index: step, total})
         await yieldToEventLoop()
-        onResult(runMemoryTest(test, "main"))
+        const outcome = tryCatch(() => runMemoryTest(test, "main"))
+        if (outcome.status === "success") {
+            onResult(outcome.value)
+        } else {
+            onWorkerError?.({kind: "worker-error", message: `${test.label} (main): ${errorMessage(outcome.error)}`})
+        }
         step++
     }
     let worker: Worker
@@ -45,6 +53,8 @@ export const runMemoryBenchmarks = async (
                     })
                 } else if (message.kind === "result") {
                     onResult(message.result)
+                } else if (message.kind === "test-error") {
+                    onWorkerError?.({kind: "worker-error", message: `${message.label} (worker): ${message.message}`})
                 } else if (message.kind === "done") {
                     resolve()
                 }
